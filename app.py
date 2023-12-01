@@ -99,6 +99,7 @@ def main(page:Page):
             time.sleep(3)
             progress_text.value = "No Task"
             progress_text.update()
+            return
         if format_dd.value == "mp4":
             if quality_dd.value == "Auto" and playlist_sw.value == True:
                 cmd = "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]"
