@@ -17,4 +17,5 @@ pip install -r requirements.txt
 ```
 python app.py
 ```
-で起動できます。
+で起動できます.  
+別に `git clone` しても大丈夫ですよ. 更新も `git pull` でできるしね.
