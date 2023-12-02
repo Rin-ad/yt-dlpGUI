@@ -36,18 +36,30 @@ def main(page:Page):
         progress_text.update()
         dl_btn.update()
         def hook(d):
+            info_dict = d.get('info_dict')
+            movie_title = info_dict.get('title')
+            playlist_title = info_dict.get('playlist_title')
+            progress_title.value = movie_title
+            progress_playlist.value = playlist_title
+            progress_title.update()
+            progress_playlist.update()
+            if len(movie_title) > 10:
+                movie_title_short = movie_title[:15] + "..."
+            else:
+                movie_title_short = movie_title
             if d['status'] == 'downloading':
                 progress_ps = float(d['_percent_str'].replace('%', ''))
                 progress_bar.visible = True
                 percent_value_scaled = progress_ps * 0.01
                 progress_bar.value = percent_value_scaled
-                progress_text.value = f"Downloading... {progress_ps}%"
+                progress_text.value = f"Downloading... Progress:{progress_ps}%"
                 progress_bar.update()
                 progress_text.update()
         ydl_opts = {
             'progress_hooks': [hook],
             'format': format,
             'noprogress':True,
+            'ignoreerrors':True,
             'color':'no_color',
             'writethumbnail': 'true',
             'default_search': 'ytsearch',
@@ -75,12 +87,23 @@ def main(page:Page):
         progress_text.update()
         dl_btn.update()
         def hook(d):
+            info_dict = d.get('info_dict')
+            movie_title = info_dict.get('title')
+            playlist_title = info_dict.get('playlist_title')
+            progress_title.value = movie_title
+            progress_playlist.value = playlist_title
+            progress_title.update()
+            progress_playlist.update()
+            if len(movie_title) > 10:
+                movie_title_short = movie_title[:15] + "..."
+            else:
+                movie_title_short = movie_title
             if d['status'] == 'downloading':
                 progress_ps = float(d['_percent_str'].replace('%', ''))
                 progress_bar.visible = True
                 percent_value_scaled = progress_ps * 0.01
                 progress_bar.value = percent_value_scaled
-                progress_text.value = f"Downloading... {progress_ps}%"
+                progress_text.value = f"Downloading... Progress:{progress_ps}%"
                 progress_bar.update()
                 progress_text.update()
         ydl_opts = {
@@ -185,8 +208,10 @@ def main(page:Page):
     dl_btn = ft.FilledButton("Download",icon=ft.icons.DOWNLOAD,on_click=initialize_download)
     progress_text = ft.Text(value="No Task")
     progress_bar = ft.ProgressBar(value=0)
+    progress_title = ft.TextField(read_only=True,label="Downloading Title")
+    progress_playlist = ft.TextField(read_only=True,label="Downloading Playlist")
 
-    page.add(text,url_input,format_dd,quality_dd,playlist_sw,ft.Row([dl_btn,progress_text]),progress_bar)
+    page.add(text,url_input,format_dd,quality_dd,playlist_sw,ft.Row([dl_btn,progress_text]),ft.Text("Progress:",size=16,weight=ft.FontWeight.BOLD),progress_title,progress_playlist,progress_bar)
 
 #Run App
 ft.app(main)
