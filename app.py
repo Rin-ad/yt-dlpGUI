@@ -18,12 +18,15 @@ def main(page:Page):
     def formatdd_changed(e):
         if format_dd.value == "mp4":
             quality_dd.options = sel_mp4
+            quality_dd.value = "Auto"
             quality_dd.update()
         elif format_dd.value == "mp3":
             quality_dd.options = sel_mp3
+            quality_dd.value = "Auto"
             quality_dd.update()
         elif format_dd.value == "wav":
             quality_dd.options = [ft.dropdown.Option('Auto')]
+            quality_dd.value = "Auto"
             quality_dd.update()
     
     #Called when a video is downloaded.
@@ -46,7 +49,16 @@ def main(page:Page):
             'format': format,
             'noprogress':True,
             'color':'no_color',
+            'writethumbnail': 'true',
             'default_search': 'ytsearch',
+            'postprocessors':[{
+                'key':'FFmpegMetadata',
+                'add_metadata': True
+            },
+            {
+                'key': 'EmbedThumbnail',
+                'already_have_thumbnail': False,
+            }],
             'outtmpl': f'video/{opt}%(title)s.%(ext)s'
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -81,6 +93,10 @@ def main(page:Page):
                 'key':'FFmpegExtractAudio',
                 'preferredcodec':audio,
                 'preferredquality':quality
+            },
+            {
+                'key':'FFmpegMetadata',
+                'add_metadata': True
             }],
             'default_search': 'ytsearch'
         }
