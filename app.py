@@ -43,10 +43,6 @@ def main(page:Page):
             progress_playlist.value = playlist_title
             progress_title.update()
             progress_playlist.update()
-            if len(movie_title) > 10:
-                movie_title_short = movie_title[:15] + "..."
-            else:
-                movie_title_short = movie_title
             if d['status'] == 'downloading':
                 progress_ps = float(d['_percent_str'].replace('%', ''))
                 progress_bar.visible = True
@@ -94,10 +90,6 @@ def main(page:Page):
             progress_playlist.value = playlist_title
             progress_title.update()
             progress_playlist.update()
-            if len(movie_title) > 10:
-                movie_title_short = movie_title[:15] + "..."
-            else:
-                movie_title_short = movie_title
             if d['status'] == 'downloading':
                 progress_ps = float(d['_percent_str'].replace('%', ''))
                 progress_bar.visible = True
