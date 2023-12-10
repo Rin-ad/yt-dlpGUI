@@ -9,6 +9,7 @@ import time
 def main(page:Page):
     page.title = "yt-dlpGUI"
     page.padding = 24
+    page.window_width = 550
 
     #Quality selection dropdown options
     sel_mp4 = [ft.dropdown.Option('Auto'),ft.dropdown.Option('1080p'),ft.dropdown.Option('720p')]
