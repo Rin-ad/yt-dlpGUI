@@ -4,9 +4,9 @@ from flet import (
     Text,TextField,Page,
 )
 import time
-import os
+from os.path import expanduser
 
-home = os.environ['HOME']
+home = expanduser("~")
 
 #App Window
 def main(page:Page):
