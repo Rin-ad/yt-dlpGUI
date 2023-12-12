@@ -39,6 +39,7 @@ def main(page:Page):
         progress_text.value = "Downloading..."
         progress_text.update()
         dl_btn.update()
+        #Update progress information
         def hook(d):
             info_dict = d.get('info_dict')
             movie_title = info_dict.get('title')
@@ -86,6 +87,7 @@ def main(page:Page):
         progress_text.value = "Downloading..."
         progress_text.update()
         dl_btn.update()
+        #Update progress information
         def hook(d):
             info_dict = d.get('info_dict')
             movie_title = info_dict.get('title')
