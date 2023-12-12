@@ -4,6 +4,9 @@ from flet import (
     Text,TextField,Page,
 )
 import time
+import os
+
+home = os.environ['HOME']
 
 #App Window
 def main(page:Page):
@@ -68,7 +71,7 @@ def main(page:Page):
                 'key': 'EmbedThumbnail',
                 'already_have_thumbnail': False,
             }],
-            'outtmpl': f'video/{opt}%(title)s.%(ext)s'
+            'outtmpl': f'{home}/Documents/yt-dlp/video/{opt}%(title)s.%(ext)s'
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
@@ -104,7 +107,7 @@ def main(page:Page):
             'format': format,
             'noprogress': True,
             'color':'no_color',
-            'outtmpl': f'audio/{opt}%(title)s.%(ext)s',
+            'outtmpl': f'{home}/Documents/yt-dlp/audio/{opt}%(title)s.%(ext)s',
             'postprocessors':[{
                 'key':'FFmpegExtractAudio',
                 'preferredcodec':audio,
